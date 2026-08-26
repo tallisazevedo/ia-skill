@@ -1,0 +1,39 @@
+---
+name: backend-dotnet-code-review
+description: Revisa uma mudança backend .NET antes do commit, checando em paralelo a adesão aos padrões do repositório e ao ticket ou spec que a originou. Use manualmente depois de `backend-dotnet-implementation`, antes de commitar.
+disable-model-invocation: true
+---
+
+# Code Review Backend .NET
+
+Duas perguntas fecham o ciclo, e nenhuma substitui a outra: o código segue os padrões da empresa, e o código entrega o que o ticket pediu.
+
+## 1. Verifique os padrões
+
+Para cada arquivo tocado no diff, confira contra a referência correspondente:
+
+- Nomenclatura de classes, interfaces, Requests/Responses: `../backend-dotnet/references/naming.md`.
+- Responsabilidade de camada (domínio, aplicação, infraestrutura, IoC): `../backend-dotnet/references/architecture.md`.
+- Invariantes e exceções de domínio: `../backend-dotnet/references/domain.md`.
+- Mapeamento, repositório e Unit of Work: `../backend-dotnet/references/persistence.md`.
+- Contrato de API, códigos de resposta e formato: `../backend-dotnet/references/api.md`.
+- Logs estruturados e dados sensíveis: `../backend-dotnet/references/observability.md`.
+- Estrutura e nomenclatura de testes: `../backend-dotnet/references/testing.md`.
+
+Cite arquivo e trecho para cada desvio; uma impressão geral sem localização não é um achado.
+
+**Concluído quando:** todo arquivo modificado foi confrontado com a referência aplicável, e cada desvio encontrado tem arquivo e trecho citados.
+
+## 2. Verifique a adesão ao ticket
+
+Para cada critério de aceite do ticket (ou da spec, quando não houver ticket), localize a evidência no diff — código ou teste — que o satisfaz.
+
+Sinalize dois desvios distintos: um critério sem evidência no diff, e uma mudança no diff que não corresponde a nenhum critério do ticket.
+
+**Concluído quando:** todo critério de aceite tem evidência citada ou está marcado como não atendido, e toda mudança fora do escopo do ticket está identificada.
+
+## 3. Consolide
+
+Junte os achados das duas verificações em uma lista única, cada item marcado como bloqueante ou sugestão, com arquivo e trecho.
+
+**Concluído quando:** a lista existe, cada item tem sua origem (padrão ou aderência ao ticket) e sua severidade explícitas, e a mudança só está liberada para commit quando não há item bloqueante pendente.
