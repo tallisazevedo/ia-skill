@@ -13,7 +13,8 @@ está no ticket — diga isso em vez de reconstruir o contexto por suposição.
 Leia o ticket, a solução e os testes próximos. Identifique o contexto de negócio, o fluxo de
 entrada e saída, as áreas tocadas e as regras que precisam permanecer verdadeiras.
 
-Invoque `backend-dotnet-padroes` e carregue a referência de cada área que a mudança toca.
+Chame a ferramenta Skill com "backend-dotnet-padroes" e carregue a referência de cada área que a
+mudança toca.
 
 **Concluído quando:** existe um resumo curto com requisito, contexto, áreas tocadas, símbolos a
 criar ou alterar e casos de validação esperados.
@@ -43,7 +44,8 @@ tocados.
 
 ## 4. Revise
 
-Invoque `backend-dotnet-code-review` sobre a mudança. Ela confronta o diff com os padrões da
+Chame a ferramenta Skill com "backend-dotnet-code-review" sobre a mudança. Ela confronta o diff
+com os padrões da
 empresa e com o ticket que originou o trabalho.
 
 **Concluído quando:** o code review rodou e nenhum item bloqueante ficou em aberto.
@@ -54,5 +56,8 @@ Produza um resumo com comportamento alterado, áreas tocadas, validações execu
 decisões de nomenclatura e riscos residuais. Marque explicitamente as áreas não tocadas como não
 aplicáveis, com o motivo.
 
+A entrega é o resumo. O commit é do usuário — pare aqui e deixe a mudança no diretório de
+trabalho para ele revisar.
+
 **Concluído quando:** outra pessoa consegue reproduzir a validação e localizar qualquer pendência
-sem depender de contexto implícito.
+sem depender de contexto implícito, e a mudança está entregue sem ter sido commitada.

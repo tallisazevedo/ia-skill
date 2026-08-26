@@ -38,7 +38,8 @@ em uso. Ramifique por endpoint, por contrato ou por fatia de dado, uma unidade m
 - **Dados legados e em trânsito**: o que já está persistido no formato antigo, e o que está no
   meio do caminho durante a virada.
 - **Autenticação e autorização**: o legado usa token fixo de integração, persona ou sessão? Isso
-  muda na versão nova? Ver a seção de autenticação em `../backend-dotnet/references/api.md`.
+  muda na versão nova? Chame a ferramenta Skill com "backend-dotnet-padroes" para a
+  referência de API.
 - **Fora de escopo**: o que deliberadamente **não** migra, e o que acontece com quem depende disso.
 - **Invariantes de domínio**: quais regras estavam implícitas no legado e precisam virar
   explícitas na versão nova.

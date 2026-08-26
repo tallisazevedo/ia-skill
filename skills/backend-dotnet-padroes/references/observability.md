@@ -39,14 +39,16 @@ logger.ForContext("User", usuario, destructureObjects: true)
 	.Information("<{EventoId}> {Email}", "NovoUsuario", usuario.Email);
 ```
 
-O resumo indexável deve expor o evento e o dado operacional mínimo. Não use o objeto inteiro como mensagem, pois isso torna o log extenso e pode expor campos proibidos.
+O resumo indexável deve expor o evento e o dado operacional mínimo. Não use o objeto inteiro como
+mensagem, pois isso torna o log extenso e pode expor campos proibidos.
 
 **Concluído quando:** o EventoId é estável e indexável, os campos permitem busca sem depender de
 parsing de texto e a mensagem não carrega um objeto inteiro sem necessidade.
 
 ## Registro em qualquer camada
 
-Logs podem ser registrados em qualquer projeto da solution. Injete `ILogger` no construtor e permita que o IoC resolva a dependência:
+Logs podem ser registrados em qualquer projeto da solution. Injete `ILogger` no construtor e
+permita que o IoC resolva a dependência:
 
 ```csharp
 public class FavoritosAppService
@@ -60,7 +62,8 @@ public class FavoritosAppService
 }
 ```
 
-Se a solution possuir uma interface `ILog` implementada e houver conflito de resolução, remova ou substitua o registro legado antes de introduzir `ILogger`.
+Se a solution possuir uma interface `ILog` implementada e houver conflito de resolução, remova ou
+substitua o registro legado antes de introduzir `ILogger`.
 
 **Concluído quando:** uma revisão de dados sensíveis foi feita nos campos e argumentos, o logger
 é resolvido por IoC e o acesso aos logs permanece restrito às equipes de TI.

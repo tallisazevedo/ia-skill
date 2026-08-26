@@ -23,7 +23,8 @@ foi preenchida por suposição.
 
 ## 2. Escreva a spec
 
-Invoque `backend-dotnet-padroes` para que contratos, nomes e endpoints citados na spec sigam os
+Chame a ferramenta Skill com "backend-dotnet-padroes" para que contratos, nomes e endpoints
+citados na spec sigam os
 padrões da empresa. Estruture um documento Markdown com estas seções:
 
 - **Objetivo**: o problema de negócio e por que ele importa.

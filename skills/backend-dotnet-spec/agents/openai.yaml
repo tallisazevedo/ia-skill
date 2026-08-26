@@ -1,0 +1,5 @@
+interface:
+  display_name: "Spec Backend .NET"
+  short_description: "Organizar o grill em uma spec escrita"
+policy:
+  allow_implicit_invocation: false

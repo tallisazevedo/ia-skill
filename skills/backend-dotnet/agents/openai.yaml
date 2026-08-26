@@ -1,0 +1,5 @@
+interface:
+  display_name: "Backend .NET"
+  short_description: "Escolher o fluxo de desenvolvimento backend"
+policy:
+  allow_implicit_invocation: false

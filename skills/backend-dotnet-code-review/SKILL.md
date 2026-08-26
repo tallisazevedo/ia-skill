@@ -10,10 +10,10 @@ empresa, e o código entrega o que o ticket pediu.
 
 ## 1. Verifique os padrões
 
-Invoque `backend-dotnet-padroes` e, para cada arquivo tocado no diff, confira contra a
-referência correspondente:
+Chame a ferramenta Skill com "backend-dotnet-padroes" e, para cada arquivo tocado no diff, confira
+contra a referência correspondente:
 
-| O arquivo toca | Referência |
+| O arquivo toca | Referência em `backend-dotnet-padroes` |
 |---|---|
 | Nome de classe, interface, método, Request/Response, Map, teste | `naming.md` |
 | Responsabilidade de camada | `architecture.md` |
@@ -25,9 +25,9 @@ referência correspondente:
 | Teste de entidade ou serviço de domínio, cobertura | `testing.md` |
 | Log estruturado, EventoId, dado sensível | `observability.md` |
 
-As referências trazem seus próprios critérios de conclusão; um critério não satisfeito é um
-desvio como qualquer outro. Cite arquivo e trecho para cada um — uma impressão geral sem
-localização não é um achado.
+As referências vêm com `backend-dotnet-padroes` e trazem seus próprios critérios de conclusão; um
+critério não satisfeito é um desvio como qualquer outro. Cite arquivo e trecho para cada um — uma
+impressão geral sem localização não é um achado.
 
 **Concluído quando:** todo arquivo modificado foi confrontado com a referência aplicável, e cada
 desvio encontrado tem arquivo e trecho citados.

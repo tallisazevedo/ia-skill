@@ -22,7 +22,8 @@ a classe de teste espelha o namespace da classe testada.
 
 ## Estrutura esperada
 
-O projeto de testes fica na pasta lógica `Testes`, com namespaces que espelham o projeto de domínio:
+O projeto de testes fica na pasta lógica `Testes`, com namespaces que espelham o projeto de
+domínio:
 
 ```text
 Autoglass.Template.Projeto.Domain.Tests
@@ -94,7 +95,10 @@ public void Quando_NomeForValido_Espero_PropriedadePreenchida()
 }
 ```
 
-Casos podem ser descritos como `Quando_EmailForValido_Espero_AtributoPreenchido`, `Quando_EmailForInvalido_Espero_EmailInvalidoExcecao`, `Dado_NotaFiscalInvalida_Espero_EnvioDeEmailParaRepresentante` e `Dado_VendaCancelada_Quando_ValorDeVendaMaiorDoQue2000_Entao_EnviarEmailParaGerenteDeUnidade`.
+Casos podem ser descritos como `Quando_EmailForValido_Espero_AtributoPreenchido`,
+`Quando_EmailForInvalido_Espero_EmailInvalidoExcecao`,
+`Dado_NotaFiscalInvalida_Espero_EnvioDeEmailParaRepresentante` e
+`Dado_VendaCancelada_Quando_ValorDeVendaMaiorDoQue2000_Entao_EnviarEmailParaGerenteDeUnidade`.
 
 **Concluído quando:** todos os caminhos relevantes da entidade ou serviço têm casos de sucesso,
 falha e limite, e os nomes tornam o comportamento legível sem abrir a implementação.

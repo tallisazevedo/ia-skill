@@ -1,0 +1,5 @@
+interface:
+  display_name: "Triage Backend .NET"
+  short_description: "Converter um defeito reportado em ticket"
+policy:
+  allow_implicit_invocation: false

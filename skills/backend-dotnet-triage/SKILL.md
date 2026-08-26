@@ -56,10 +56,10 @@ evidência que a sustenta.
 
 ## 4. Decida se o ticket precisa de grill
 
-Vale apenas para o desfecho de ticket. Rode `backend-dotnet-grill` antes de implementar quando a
-causa raiz envolver uma invariante nova, uma mudança de contrato ou um trade-off de robustez
-ainda não decidido pelo time — o banco **Bug com decisão nova** em
-`../backend-dotnet-grill/dimensoes.md` cobre exatamente essas dimensões. Nos demais casos, siga
-direto para `backend-dotnet-implementation`.
+Vale apenas para o desfecho de ticket. Quando a causa raiz envolver uma invariante nova, uma
+mudança de contrato ou um trade-off de robustez ainda não decidido pelo time, diga ao usuário
+para rodar `backend-dotnet-grill` sobre o ticket antes de implementar — o banco de dimensões
+**Bug com decisão nova** cobre exatamente esse caso. Nos demais casos, siga direto para
+`backend-dotnet-implementation`.
 
 **Concluído quando:** a decisão de grillar ou não está registrada no ticket com o motivo.

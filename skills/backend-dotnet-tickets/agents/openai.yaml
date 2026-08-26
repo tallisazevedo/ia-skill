@@ -1,0 +1,5 @@
+interface:
+  display_name: "Tickets Backend .NET"
+  short_description: "Cortar a spec em tickets independentes"
+policy:
+  allow_implicit_invocation: false

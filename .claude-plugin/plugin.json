@@ -1,0 +1,28 @@
+{
+  "name": "backend-dotnet-skills",
+  "version": "1.0.0",
+  "description": "Skills de desenvolvimento backend .NET: os padrões da equipe de arquitetura aplicados em qualquer tarefa, e os fluxos que levam da ideia solta ao commit.",
+  "author": {
+    "name": "Tallis Azevedo"
+  },
+  "repository": "https://github.com/tallisazevedo/ia-skill",
+  "license": "MIT",
+  "keywords": [
+    "dotnet",
+    "backend",
+    "ddd",
+    "nhibernate",
+    "code-review",
+    "grilling"
+  ],
+  "skills": [
+    "./skills/backend-dotnet",
+    "./skills/backend-dotnet-grill",
+    "./skills/backend-dotnet-triage",
+    "./skills/backend-dotnet-spec",
+    "./skills/backend-dotnet-tickets",
+    "./skills/backend-dotnet-padroes",
+    "./skills/backend-dotnet-implementation",
+    "./skills/backend-dotnet-code-review"
+  ]
+}

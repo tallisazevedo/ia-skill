@@ -1,10 +1,12 @@
 # APIs .NET
 
-Esta referência reúne os padrões de URI, resposta, JSON, métodos HTTP, Swagger e autenticação adotados pelas APIs RESTful da empresa.
+Esta referência reúne os padrões de URI, resposta, JSON, métodos HTTP, Swagger e autenticação
+adotados pelas APIs RESTful da empresa.
 
 ## URIs e recursos
 
-Um recurso é uma coleção de elementos com identificador único (normalmente uma entidade de negócio).
+Um recurso é uma coleção de elementos com identificador único (normalmente uma entidade de
+negócio).
 
 | Verbo | Path | CRUD | Uso |
 |---|---|---|---|
@@ -20,7 +22,9 @@ Regras de nomenclatura do recurso:
 - Sempre lowercase: `/vendas`, não `/Vendas` ou `/VENDAS`.
 - Nomes compostos em spinal-case: `/ordens-pagamentos`, não `/ordenspagamentos`.
 
-**Entidade forte** existe por conta própria (`/api/{prefixo}/usuarios/{codigo}`). **Entidade fraca** depende de uma entidade forte para existir e aparece aninhada sob ela, por exemplo um item de pedido em `/api/{prefixo}/pedidos/{codigo}/itens/{codigoItem}`.
+**Entidade forte** existe por conta própria (`/api/{prefixo}/usuarios/{codigo}`). **Entidade
+fraca** depende de uma entidade forte para existir e aparece aninhada sob ela, por exemplo um item
+de pedido em `/api/{prefixo}/pedidos/{codigo}/itens/{codigoItem}`.
 
 ### Prefixos de consumidor
 
@@ -31,9 +35,12 @@ Regras de nomenclatura do recurso:
 | `int-itg` | Consumida por integração interna (API chamando API) |
 | `web-itg` | Consumida por integração externa (parceiros) |
 
-Esses prefixos aplicam-se apenas a APIs de uso interno (ex.: portal de aplicações). Não fazem sentido para APIs de uso exclusivo de uma aplicação própria (ex.: Vistoria.mobi, Opini.one).
+Esses prefixos aplicam-se apenas a APIs de uso interno (ex.: portal de aplicações). Não fazem
+sentido para APIs de uso exclusivo de uma aplicação própria (ex.: Vistoria.mobi, Opini.one).
 
-**Concluído quando:** o path usa substantivo plural em spinal-case lowercase, a relação entidade forte/fraca está refletida na URI e o prefixo de consumidor está presente quando a API for de uso interno multiaplicação.
+**Concluído quando:** o path usa substantivo plural em spinal-case lowercase, a relação entidade
+forte/fraca está refletida na URI e o prefixo de consumidor está presente quando a API for de uso
+interno multiaplicação.
 
 ## Códigos e formato de resposta
 
@@ -81,7 +88,9 @@ como objetos aninhados, não como campos achatados.
 
 ## Métodos HTTP
 
-**GET** recupera dados. Parâmetros de path (`/api/usuarios/123`) identificam um recurso por ID; query params (`/api/usuarios?nome=...&pg=1&qt=50`) especificam filtros. Todo recurso de listagem deve ser paginado. Um recurso do tipo path não encontrado retorna 404.
+**GET** recupera dados. Parâmetros de path (`/api/usuarios/123`) identificam um recurso por ID;
+query params (`/api/usuarios?nome=...&pg=1&qt=50`) especificam filtros. Todo recurso de listagem
+deve ser paginado. Um recurso do tipo path não encontrado retorna 404.
 
 Requisição paginada:
 
@@ -94,7 +103,8 @@ Requisição paginada:
 }
 ```
 
-Se `Qt`/`Pg` não forem informados, o default é `Qt=10`, `Pg=1`. O máximo de registros por página é 100; pedidos acima disso retornam os 100 primeiros.
+Se `Qt`/`Pg` não forem informados, o default é `Qt=10`, `Pg=1`. O máximo de registros por página é
+100; pedidos acima disso retornam os 100 primeiros.
 
 Resposta paginada:
 
@@ -107,11 +117,13 @@ Resposta paginada:
 
 **POST** insere dados e sempre retorna o objeto criado.
 
-**PUT** edita dados: o código do recurso vai na URL, nunca no corpo; o corpo carrega os dados alterados e a resposta retorna o objeto atualizado.
+**PUT** edita dados: o código do recurso vai na URL, nunca no corpo; o corpo carrega os dados
+alterados e a resposta retorna o objeto atualizado.
 
 **DELETE** exclui ou inativa um recurso pelo código na URL e responde string vazia com 200.
 
-**Concluído quando:** cada endpoint usa o verbo correto para sua intenção, listagens são paginadas com os defaults acima, e PUT/DELETE recebem o código apenas pela URL.
+**Concluído quando:** cada endpoint usa o verbo correto para sua intenção, listagens são paginadas
+com os defaults acima, e PUT/DELETE recebem o código apenas pela URL.
 
 ## Documentação Swagger
 
@@ -124,15 +136,19 @@ Resposta paginada:
 - APIs autenticadas declaram o parâmetro `Token_Autorizacao` do tipo `header` como obrigatório.
 - Toda operação documenta as response messages possíveis (400, 401, 403, 500) com seu significado.
 
-**Concluído quando:** o Swagger da API tem título com contexto, cada recurso documentado tem descrição no infinitivo, model schema, parâmetros e response messages.
+**Concluído quando:** o Swagger da API tem título com contexto, cada recurso documentado tem
+descrição no infinitivo, model schema, parâmetros e response messages.
 
 ## Autenticação
 
-APIs não públicas devem estar autenticadas via token expirável enviado no cabeçalho `Token_Autorizacao`. Um filtro de requisição HTTP recupera e valida esse token antes da ação do controlador. Se o token estiver ausente, inválido ou expirado, a API retorna 401 sem mensagem.
+APIs não públicas devem estar autenticadas via token expirável enviado no cabeçalho
+`Token_Autorizacao`. Um filtro de requisição HTTP recupera e valida esse token antes da ação do
+controlador. Se o token estiver ausente, inválido ou expirado, a API retorna 401 sem mensagem.
 
 ### Token fixo para integração (.NET Framework)
 
-Quando o consumidor for um sistema parceiro (não uma sessão de usuário), use um token fixo em vez de login/senha:
+Quando o consumidor for um sistema parceiro (não uma sessão de usuário), use um token fixo em vez
+de login/senha:
 
 - Registre o token na tabela `DELTA.GEN_ACESSOEXTERNOAPI` (código, descrição do consumidor, data de cadastro, token em GUID, tipo de persona, código da persona, código do usuário associado às transações).
 - Gere o GUID com `[guid]::NewGuid()` no PowerShell.
@@ -152,4 +168,6 @@ public IHttpActionResult ListarTeste([FromUri]ClasseRequest request)
 }
 ```
 
-**Concluído quando:** toda API não pública exige `Token_Autorizacao`, tokens fixos de integração estão registrados na tabela e no Redis com chave por ambiente, e a controller declara os atributos de rota e autenticação de integração corretos.
+**Concluído quando:** toda API não pública exige `Token_Autorizacao`, tokens fixos de integração
+estão registrados na tabela e no Redis com chave por ambiente, e a controller declara os atributos
+de rota e autenticação de integração corretos.

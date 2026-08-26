@@ -1,0 +1,21 @@
+{
+  "name": "tallisazevedo",
+  "owner": {
+    "name": "Tallis Azevedo"
+  },
+  "description": "Skills de desenvolvimento backend .NET, como plugin instalável.",
+  "plugins": [
+    {
+      "name": "backend-dotnet-skills",
+      "source": "./",
+      "description": "Os padrões de desenvolvimento backend .NET da equipe de arquitetura, mais os fluxos de grill, spec, tickets, implementação e code review.",
+      "category": "engineering",
+      "keywords": [
+        "dotnet",
+        "backend",
+        "ddd",
+        "code-review"
+      ]
+    }
+  ]
+}

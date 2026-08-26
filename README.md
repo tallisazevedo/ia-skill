@@ -37,29 +37,28 @@ review avulso. Você nunca precisa lembrar de encaminhá-los.
 ## Instalar
 
 ```bash
-git clone https://github.com/tallisazevedo/ia-skill.git ~/ia-skill
-
-mkdir -p ~/.claude/skills
-for d in ~/ia-skill/backend-dotnet*/; do
-  ln -s "$d" ~/.claude/skills/$(basename "$d")
-done
+npx skills add tallisazevedo/ia-skill
 ```
 
-Com links simbólicos, `git pull` em `~/ia-skill` atualiza todas as skills de uma vez. Para
-confirmar que pegou, abra o Claude Code e digite `/backend-dotnet` — o roteador deve responder
-com a lista de fluxos.
+O Skills CLI instala a família inteira e configura a ferramenta que você usa. Ele distribui para
+Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Zed, Cline, opencode, Warp, Amp e outras
+— cada skill carrega um `agents/openai.yaml` com a metadata e a política de invocação da sua
+ferramenta.
 
-> [!WARNING]
-> **Não instale uma skill sozinha.** As skills apontam para as referências por caminho relativo
-> (`../backend-dotnet/references/domain.md`) e precisam ser irmãs na mesma pasta. Copiar só
-> `backend-dotnet-padroes` para outro lugar não quebra com erro — ele simplesmente não encontra
-> os padrões e segue sem eles, que é pior.
+Para atualizar depois:
+
+```bash
+npx skills update
+```
 
 ### Seu primeiro uso
 
-Digite `/backend-dotnet` e descreva o que você vai fazer; o roteador escolhe o fluxo. Se você já
-sabe o que quer, pule direto: `/backend-dotnet-grill` para um trabalho ainda em aberto,
-`/backend-dotnet-triage` para um defeito que chegou de fora.
+Invoque `backend-dotnet` e descreva o que você vai fazer; o roteador escolhe o fluxo. Se você já
+sabe o que quer, pule direto: `backend-dotnet-grill` para um trabalho ainda em aberto,
+`backend-dotnet-triage` para um defeito que chegou de fora.
+
+A sintaxe muda por ferramenta — no Claude Code é `/backend-dotnet`, em outras é o seletor de
+skills. O nome é sempre o mesmo.
 
 ---
 
@@ -252,20 +251,20 @@ carregam os padrões pela mesma porta.
 
 ## Os padrões
 
-Ficam em [`backend-dotnet/references/`](backend-dotnet/references) e são expostos por
+Ficam em [`skills/backend-dotnet-padroes/references/`](skills/backend-dotnet-padroes/references) e são expostos por
 `backend-dotnet-padroes`. Cada um carrega seus próprios critérios de conclusão.
 
 | Referência | Cobre |
 |---|---|
-| [`architecture.md`](backend-dotnet/references/architecture.md) | Responsabilidade de cada camada e onde uma regra deve morar |
-| [`naming.md`](backend-dotnet/references/naming.md) | Nomenclatura e linguagem ubíqua em português |
-| [`domain.md`](backend-dotnet/references/domain.md) | Entidades válidas desde a construção, serviços, comandos, validação |
-| [`application.md`](backend-dotnet/references/application.md) | Request, Response, AppService, orquestração, async e `CancellationToken` |
-| [`api.md`](backend-dotnet/references/api.md) | URI, códigos e formato de resposta, paginação, JSON, Swagger, autenticação |
-| [`persistence.md`](backend-dotnet/references/persistence.md) | Mapeamento NHibernate, repositórios, Unit of Work, Dapper, HttpClient |
-| [`ioc.md`](backend-dotnet/references/ioc.md) | Registro de dependências, bootstrapper, ciclo de vida |
-| [`testing.md`](backend-dotnet/references/testing.md) | Testes de domínio, nomenclatura de casos, cobertura |
-| [`observability.md`](backend-dotnet/references/observability.md) | Logs estruturados, EventoId, níveis, dados sensíveis |
+| [`architecture.md`](skills/backend-dotnet-padroes/references/architecture.md) | Responsabilidade de cada camada e onde uma regra deve morar |
+| [`naming.md`](skills/backend-dotnet-padroes/references/naming.md) | Nomenclatura e linguagem ubíqua em português |
+| [`domain.md`](skills/backend-dotnet-padroes/references/domain.md) | Entidades válidas desde a construção, serviços, comandos, validação |
+| [`application.md`](skills/backend-dotnet-padroes/references/application.md) | Request, Response, AppService, orquestração, async e `CancellationToken` |
+| [`api.md`](skills/backend-dotnet-padroes/references/api.md) | URI, códigos e formato de resposta, paginação, JSON, Swagger, autenticação |
+| [`persistence.md`](skills/backend-dotnet-padroes/references/persistence.md) | Mapeamento NHibernate, repositórios, Unit of Work, Dapper, HttpClient |
+| [`ioc.md`](skills/backend-dotnet-padroes/references/ioc.md) | Registro de dependências, bootstrapper, ciclo de vida |
+| [`testing.md`](skills/backend-dotnet-padroes/references/testing.md) | Testes de domínio, nomenclatura de casos, cobertura |
+| [`observability.md`](skills/backend-dotnet-padroes/references/observability.md) | Logs estruturados, EventoId, níveis, dados sensíveis |
 
 ### Duas regras atravessam todas as áreas
 
@@ -314,5 +313,7 @@ skill. As skills apontam para as referências justamente para que exista um luga
 
 - A regra nova tem **um** lugar, ou você acabou de criar uma segunda fonte de verdade?
 - A seção nova termina em um critério de conclusão verificável?
-- Os caminhos relativos ainda resolvem? (`../backend-dotnet/references/…`)
+- A skill continua autossuficiente, sem link `../` para a pasta de outra skill?
+- Se você adicionou uma skill, ela entrou em `.claude-plugin/plugin.json` e ganhou seu
+  `agents/openai.yaml`?
 - Se você mexeu na invocação de uma skill, este README e o roteador ainda dizem a verdade?
