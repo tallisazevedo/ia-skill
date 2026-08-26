@@ -8,7 +8,7 @@ O domínio contém entidades e serviços que expressam regras de negócio. Entid
 
 ## Aplicação
 
-A aplicação recebe e entrega contratos, coordena o caso de uso e chama abstrações. Requests e Responses são objetos de transporte. I/O deve ser assíncrono quando suportado, com propagação de `CancellationToken`. Quando o caso de uso é exposto por uma controller HTTP, o endpoint segue os padrões de `references/api.md` (URI, resposta, paginação, JSON, Swagger e autenticação).
+A aplicação recebe e entrega contratos, coordena o caso de uso e chama abstrações. Requests e Responses são objetos de transporte. I/O deve ser assíncrono quando suportado, com propagação de `CancellationToken`. Quando o caso de uso é exposto por uma controller HTTP, o endpoint segue os padrões de `api.md` (URI, resposta, paginação, JSON, Swagger e autenticação).
 
 ## Infraestrutura
 
@@ -25,3 +25,7 @@ Logs podem ser injetados em qualquer camada quando houver um evento operacional 
 ## Classes anêmicas
 
 Filtros, consultas e comandos simples que apenas transportam dados são objetos de contrato ou suporte. Eles não devem receber regras de negócio apenas para evitar colocá-las no domínio.
+
+**Concluído quando:** cada responsabilidade nova está na camada que possui os dados e o
+conhecimento para exercê-la, e nenhuma camada assumiu detalhe de outra para evitar uma
+indireção.

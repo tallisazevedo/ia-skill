@@ -1,5 +1,7 @@
 # Testes .NET
 
+## Escopo e preparação
+
 - O foco dos testes unitários é o projeto `Domain`, especialmente entidades e serviços.
 - Classes anêmicas como filtros, consultas e comandos ficam fora do escopo unitário padrão, salvo risco específico.
 - O projeto segue `<Solution>.Domain.Tests` e espelha os namespaces do domínio.

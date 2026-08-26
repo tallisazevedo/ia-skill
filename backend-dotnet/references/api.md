@@ -56,6 +56,9 @@ Corpo de erro para 400 e 500:
 
 401 e 403 respondem corpo vazio (`""`). 200 responde `""` ou o objeto/coleção solicitado.
 
+**Concluído quando:** cada resposta usa o código previsto para o seu caso, e o corpo de erro
+segue o formato acima em vez de um formato próprio do endpoint.
+
 ## Formato de JSON
 
 - Atributos com a primeira letra maiúscula (`Codigo`, não `codigo`).
@@ -72,6 +75,9 @@ Corpo de erro para 400 e 500:
     }
 }
 ```
+
+**Concluído quando:** atributos seguem a capitalização acima e entidades relacionadas aparecem
+como objetos aninhados, não como campos achatados.
 
 ## Métodos HTTP
 
