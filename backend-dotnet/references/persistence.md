@@ -1,10 +1,12 @@
 # Persistência e Integrações .NET
 
-Esta referência reúne os padrões de persistência e integração da infraestrutura.
+Padrões de persistência e integração da infraestrutura. Valide os padrões já existentes na
+solução antes de escolher uma extensão NHibernate ou introduzir uma tecnologia nova.
 
-## NHibernate
+## Mapeamento NHibernate
 
-Classes de mapeamento seguem `<Entidade>Map.cs` e fazem a ligação entre entidade e tabela.
+Classes de mapeamento seguem `<Entidade>Map.cs` e ligam entidade a tabela. Declare tabela,
+identificador, colunas e relacionamentos explicitamente.
 
 ```csharp
 public class ModuloMap : ClassMap<Modulo>
@@ -18,7 +20,7 @@ public class ModuloMap : ClassMap<Modulo>
 }
 ```
 
-Para um relacionamento um-para-um, mapeie a referência e a coluna estrangeira explicitamente:
+Para um-para-um, mapeie a referência e a coluna estrangeira explicitamente:
 
 ```csharp
 public class FuncaoMap : ClassMap<Funcao>
@@ -33,38 +35,60 @@ public class FuncaoMap : ClassMap<Funcao>
 }
 ```
 
-Para um-para-muitos, confirme a coleção, a coluna estrangeira e a estratégia de cascata antes de mapear. Para muitos-para-muitos, confirme a tabela de junção, as duas chaves e o comportamento de remoção.
+Antes de usar `References`, coleções ou `NotFound.Ignore()`, confirme cardinalidade, coluna
+estrangeira, nulabilidade e comportamento de entidade ausente. Para um-para-muitos, confirme a
+coleção, a coluna estrangeira e a estratégia de cascata. Para muitos-para-muitos, confirme a
+tabela de junção, as duas chaves e o comportamento de remoção.
 
-## Repositórios
+**Concluído quando:** cada propriedade persistida tem mapeamento intencional, cada
+relacionamento tem cardinalidade e carregamento verificados, e o mapeamento está incluído na
+configuração da sessão.
 
-Repositórios de backend implementam contratos de acesso a dados e devem seguir o nome da entidade/contexto adotado na solução. Escolha a tecnologia já usada pelo contexto:
+## Repositórios e Unit of Work
 
-- NHibernate + Fluent para entidades mapeadas e Unit of Work da solução.
-- Dapper para consultas SQL quando o contexto adotar esse caminho.
-- HttpClient para repositórios que consomem APIs externas.
+Repositórios implementam contratos de acesso a dados e seguem o nome da entidade ou contexto
+adotado na solução. O contrato pode viver no domínio ou na aplicação conforme a arquitetura da
+solução; a implementação fica na infraestrutura. Repositórios concentram consultas e comandos
+de persistência, nunca regras de negócio.
 
-Para APIs externas, mantenha entidade interna e Response externo separados; converta o contrato no repositório e propague cancelamento, timeout e erros conforme o padrão do cliente.
+Preserve a transação e o ciclo de vida definidos pelo Unit of Work existente, e propague
+`CancellationToken` nas operações assíncronas suportadas pelo provedor. Use a abstração de
+persistência que o contexto já possui em vez de introduzir uma nova.
 
-Repositórios concentram consultas e comandos de persistência, mas não regras de negócio. O contrato pode viver no domínio ou na aplicação conforme a arquitetura da solução; a implementação fica na infraestrutura.
+**Concluído quando:** a implementação usa as abstrações já adotadas, a transação é consistente
+com o fluxo e as operações novas têm teste ou validação de integração disponível.
 
-## Consultas e filtros
+## Escolha da tecnologia
 
-Filtros representam critérios de seleção e consultas representam a intenção de leitura. Nomeie e componha esses objetos conforme a entidade ou contexto. Deixe critérios reutilizáveis e sem regra de mutação; o repositório aplica o filtro/consulta na tecnologia escolhida.
+Escolha a tecnologia que o contexto já adota:
 
-## Acesso a banco
+- **NHibernate + Fluent** para entidades mapeadas sob o Unit of Work da solução.
+- **Dapper** quando o contexto já adota SQL explícito. Parametrize toda entrada, mantenha
+  conexão e transação sob o ciclo de vida correto e valide o mapeamento do resultado para o
+  modelo esperado. Toda entrada externa vai como parâmetro, nunca concatenada no SQL.
+- **HttpClient** para repositórios que consomem APIs externas. Encapsule cliente, contrato
+  externo, autenticação, timeout, cancelamento e tratamento de erro. Converta o Response
+  externo para a entidade ou modelo interno dentro do repositório.
 
-Siga o padrão de acesso a banco definido pela solution, incluindo a estratégia alternativa quando o contexto exigir. Em Dapper, valide parâmetros, mapeamento de retorno, transação e ciclo de vida da conexão. Nunca concatene entrada externa em SQL.
-
-**Concluído quando:** tecnologia, conexão, transação, parâmetros, mapeamento de retorno e comportamento de erro foram verificados para cada operação nova.
-
-## Dapper
-
-Antes de usar Dapper, confirme os pré-requisitos e o padrão de acesso do contexto. Parametrize toda entrada, mantenha conexão e transação sob o ciclo de vida correto e valide o mapeamento do resultado para o modelo esperado. Não concatene entrada externa em SQL.
-
-## HttpClient
-
-Repositórios que consomem APIs devem encapsular o cliente, o contrato externo, autenticação, timeout, cancelamento e tratamento de erros. O Response da API não deve vazar diretamente para o domínio; converta-o para a entidade ou modelo interno.
+**Concluído quando:** a tecnologia escolhida coincide com o padrão do contexto, os parâmetros
+são seguros, o contrato externo não vaza para o domínio e a operação foi exercitada.
 
 ## Filtros e consultas
 
-Filtros representam critérios reutilizáveis de seleção. Consultas representam uma intenção de leitura. Ambos devem ser compostos com dados e critérios, sem mutação inesperada ou dependência direta do mecanismo de persistência quando isso não for necessário.
+Filtros representam critérios reutilizáveis de seleção; consultas representam uma intenção de
+leitura. Ambos são compostos com dados e critérios, sem regra de mutação e sem dependência
+direta do mecanismo de persistência quando isso não for necessário. O repositório aplica o
+filtro ou a consulta na tecnologia escolhida.
+
+**Concluído quando:** critérios estão nomeados pela entidade ou contexto, são reutilizáveis e
+não carregam detalhes acidentais da tecnologia.
+
+## Verificação
+
+Execute build, testes aplicáveis e uma validação do mapeamento ou consulta contra o ambiente
+seguro disponível. Inspecione SQL ou plano de consulta quando a mudança puder alterar
+cardinalidade ou desempenho.
+
+**Concluído quando:** o caminho de leitura e escrita foi exercitado, os relacionamentos não
+geram dados duplicados inesperados e nenhuma credencial ou dado sensível foi adicionado ao
+código ou ao log.

@@ -1,7 +1,6 @@
 ---
 name: backend-dotnet-code-review
-description: Revisa uma mudança backend .NET antes do commit, checando em paralelo a adesão aos padrões do repositório e ao ticket ou spec que a originou. Use manualmente depois de `backend-dotnet-implementation`, antes de commitar.
-disable-model-invocation: true
+description: Revisa uma mudança backend .NET antes do commit, checando a adesão aos padrões da empresa e ao ticket ou spec que a originou. Use sempre antes de commitar uma mudança backend .NET, e ao final de `backend-dotnet-implementation`.
 ---
 
 # Code Review Backend .NET
@@ -10,7 +9,8 @@ Duas perguntas fecham o ciclo, e nenhuma substitui a outra: o código segue os p
 
 ## 1. Verifique os padrões
 
-Para cada arquivo tocado no diff, confira contra a referência correspondente:
+Invoque `backend-dotnet-padroes` e, para cada arquivo tocado no diff, confira contra a
+referência correspondente:
 
 - Nomenclatura de classes, interfaces, Requests/Responses: `../backend-dotnet/references/naming.md`.
 - Responsabilidade de camada (domínio, aplicação, infraestrutura, IoC): `../backend-dotnet/references/architecture.md`.

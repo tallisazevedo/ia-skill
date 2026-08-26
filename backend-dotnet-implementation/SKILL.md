@@ -9,7 +9,7 @@ description: Conduz uma mudança backend .NET do requisito até a validação. U
 
 Leia a solicitação, a solução e os testes próximos. Identifique o contexto de negócio, o fluxo de entrada e saída, as camadas tocadas e as regras que precisam permanecer verdadeiras.
 
-Consulte `../backend-dotnet/references/architecture.md` para decidir as responsabilidades das camadas e `../backend-dotnet/references/naming.md` antes de criar símbolos.
+Invoque `backend-dotnet-padroes` e carregue a referência de cada área que a mudança toca.
 
 **Concluído quando:** existe um resumo curto com requisito, contexto, camadas tocadas, símbolos a criar ou alterar e casos de validação esperados.
 
@@ -25,7 +25,14 @@ Execute o teste mais estreito que pode falsificar a hipótese da implementação
 
 **Concluído quando:** os comandos executados estão registrados, todos passam ou cada falha externa está identificada, e a revisão cobre todos os arquivos modificados e todos os contratos tocados.
 
-## 4. Entregue
+## 4. Revise
+
+Invoque `backend-dotnet-code-review` sobre a mudança. Ela confronta o diff com os padrões da
+empresa e com o ticket que originou o trabalho.
+
+**Concluído quando:** o code review rodou e nenhum item bloqueante ficou em aberto.
+
+## 5. Entregue
 
 Produza um resumo com comportamento alterado, camadas tocadas, validações executadas, cobertura, decisões de nomenclatura e riscos residuais. Inclua explicitamente as etapas do roteador que foram puladas e por quê.
 

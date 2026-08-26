@@ -23,6 +23,8 @@ Antes de criar um log, responda:
 
 Sem esse objetivo, a aplicação tende a produzir mensagens mal formatadas e custosas de analisar.
 
+**Concluído quando:** cada log novo tem evento, propósito, nível e consumidor identificados.
+
 ## Exemplo
 
 ```csharp
@@ -38,6 +40,9 @@ logger.ForContext("User", usuario, destructureObjects: true)
 ```
 
 O resumo indexável deve expor o evento e o dado operacional mínimo. Não use o objeto inteiro como mensagem, pois isso torna o log extenso e pode expor campos proibidos.
+
+**Concluído quando:** o EventoId é estável e indexável, os campos permitem busca sem depender de
+parsing de texto e a mensagem não carrega um objeto inteiro sem necessidade.
 
 ## Registro em qualquer camada
 
@@ -56,3 +61,14 @@ public class FavoritosAppService
 ```
 
 Se a solution possuir uma interface `ILog` implementada e houver conflito de resolução, remova ou substitua o registro legado antes de introduzir `ILogger`.
+
+**Concluído quando:** uma revisão de dados sensíveis foi feita nos campos e argumentos, o logger
+é resolvido por IoC e o acesso aos logs permanece restrito às equipes de TI.
+
+## Verificação
+
+Exercite o caminho que produz o evento e confirme no sink disponível que o EventoId, o nível e
+as propriedades aparecem estruturados. Verifique também o comportamento de erro e cancelamento.
+
+**Concluído quando:** o evento pode ser encontrado por EventoId, não expõe dados proibidos e o
+resumo final registra o objetivo e os níveis usados.

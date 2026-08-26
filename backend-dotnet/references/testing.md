@@ -15,6 +15,9 @@
 - Soluções .NET Core devem alcançar 80% de cobertura. Em .NET Framework, código novo relevante deve ter testes.
 - Interprete cobertura considerando os filtros corporativos que excluem exceções, comandos, filtros e consultas quando aplicável.
 
+**Concluído quando:** o projeto correto foi identificado, suas dependências estão disponíveis e
+a classe de teste espelha o namespace da classe testada.
+
 ## Estrutura esperada
 
 O projeto de testes fica na pasta lógica `Testes`, com namespaces que espelham o projeto de domínio:
@@ -91,6 +94,9 @@ public void Quando_NomeForValido_Espero_PropriedadePreenchida()
 
 Casos podem ser descritos como `Quando_EmailForValido_Espero_AtributoPreenchido`, `Quando_EmailForInvalido_Espero_EmailInvalidoExcecao`, `Dado_NotaFiscalInvalida_Espero_EnvioDeEmailParaRepresentante` e `Dado_VendaCancelada_Quando_ValorDeVendaMaiorDoQue2000_Entao_EnviarEmailParaGerenteDeUnidade`.
 
+**Concluído quando:** todos os caminhos relevantes da entidade ou serviço têm casos de sucesso,
+falha e limite, e os nomes tornam o comportamento legível sem abrir a implementação.
+
 ## Cobertura
 
 O relatório tradicional usa filtros equivalentes a:
@@ -109,3 +115,6 @@ var openCoverSettings = new OpenCoverSettings
 .WithFilter("-[" + solution + ".Domain*]*Filters*")
 .WithFilter("-[" + solution + ".Domain*]*Queries*");
 ```
+
+**Concluído quando:** os testes passam, a cobertura foi gerada ou a indisponibilidade foi
+registrada, e toda regra nova de entidade ou serviço está representada nos testes.

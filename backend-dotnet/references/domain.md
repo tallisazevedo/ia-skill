@@ -27,6 +27,9 @@ public Heroi(string nome, string email)
 - Diferencie validações de obrigatoriedade, tamanho, formato, faixa e transição de estado.
 - Mantenha o número de parâmetros de construtores e métodos compatível com a legibilidade do conceito; agrupe dados que formam um objeto do domínio.
 
+**Concluído quando:** cada caminho de criação e mutação foi inspecionado, as invariantes estão
+protegidas, as exceções esperadas são explícitas e os nomes refletem o vocabulário do negócio.
+
 ## Serviços
 
 Use serviço de domínio de entidade quando a operação pertence a uma entidade, mas sua complexidade ou colaboração justifica uma classe própria. Use serviço de domínio de contexto quando a regra relaciona entidades ou conceitos do contexto. A localização deve responder à pergunta: qual objeto conhece os dados e a regra sem depender de detalhes externos?
@@ -45,8 +48,23 @@ Use-o quando a regra relacionar mais de uma entidade ou conceitos do contexto. O
 
 Para decidir onde colocar uma regra, pergunte qual objeto possui os dados e o conhecimento necessários. Se a regra preserva um invariante de uma entidade, coloque-a na entidade. Se relaciona entidades, use serviço de domínio. Se coordena entrada, saída ou persistência, use aplicação ou infraestrutura.
 
+**Concluído quando:** o serviço contém apenas decisão ou orquestração de domínio, seus
+colaboradores estão claros e nenhuma regra foi duplicada em outra camada.
+
 ## Comandos
 
 Comandos representam uma intenção de alteração. Nomeie-os com a linguagem do domínio e mantenha-os simples, contendo os dados necessários para a operação. Use-os quando a intenção, validação ou tratamento da operação ganhar clareza com um objeto próprio; não crie comandos apenas para envolver uma chamada trivial.
 
 Comandos não devem carregar acesso a banco, HTTP ou serviços de infraestrutura. Quando forem apenas classes anêmicas sem regra, permaneçam no escopo de transporte e não recebam testes unitários de domínio por padrão.
+
+**Concluído quando:** cada comando novo representa uma intenção real, tem dados mínimos e é
+consumido por um fluxo de aplicação ou domínio identificável.
+
+## Validação da regra
+
+Cubra sucesso, entradas nulas ou vazias, limites, combinações inválidas, transições de estado e
+dependências ausentes. Transforme condicionais complexas em operações nomeadas quando isso
+tornar a regra mais legível.
+
+**Concluído quando:** cada regra nova tem pelo menos um caso válido e um caso inválido, e os
+testes de domínio passam conforme `testing.md`.
