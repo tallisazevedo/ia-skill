@@ -37,11 +37,13 @@ padrões da empresa. Estruture um documento Markdown com estas seções:
 - **Riscos residuais**: decisões marcadas como "não sei" no grill, com a investigação pendente
   registrada.
 
-Salve o arquivo em `specs/<slug-da-funcionalidade>.md` na raiz do repositório da solução, a menos
-que o repositório já tenha uma convenção diferente.
+Salve o arquivo em `specs/<slug-da-funcionalidade>/spec.md` na raiz do repositório da solução, a
+menos que o repositório já tenha uma convenção diferente. A pasta `<slug-da-funcionalidade>` é a
+unidade de trabalho: os tickets que `backend-dotnet-tickets` cortar entram nela em seguida, e o
+slug escolhido aqui é o que eles vão usar.
 
 **Concluído quando:** toda seção existe e reflete apenas decisões já tomadas, o arquivo foi salvo
-no repositório, e nenhuma seção genérica substitui uma decisão específica do grill.
+na pasta do slug, e nenhuma seção genérica substitui uma decisão específica do grill.
 
 ## Entrega
 

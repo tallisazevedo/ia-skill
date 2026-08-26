@@ -41,8 +41,11 @@ como tal.
 ## Entrega
 
 Salve os tickets em `specs/<slug-da-funcionalidade>/tickets/<NN>-<titulo>.md`, um arquivo por
-fatia. Cada `backend-dotnet-implementation` seguinte começa em conversa nova, recebendo apenas o
-arquivo do ticket — não a spec inteira nem o histórico do grill.
+fatia. O `<slug-da-funcionalidade>` é o da pasta onde `backend-dotnet-spec` salvou o `spec.md` —
+não invente um novo, é o que mantém a spec e seus tickets juntos. Cada
+`backend-dotnet-implementation` seguinte começa em conversa nova, recebendo apenas o arquivo do
+ticket — não a spec inteira nem o histórico do grill.
 
-**Concluído quando:** cada ticket está salvo em arquivo próprio, e o conjunto de arquivos é
-suficiente para iniciar qualquer implementação sem contexto adicional.
+**Concluído quando:** cada ticket está salvo em arquivo próprio dentro da pasta da spec que o
+originou, e o conjunto de arquivos é suficiente para iniciar qualquer implementação sem contexto
+adicional.

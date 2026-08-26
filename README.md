@@ -132,7 +132,7 @@ corrigir — o desfecho é comunicação, e o fluxo termina ali.
 |---|---|
 | **Quando** | Um defeito chegou de fora como sintoma |
 | **Não use** | Para pedido externo que não é defeito. Isso é grill |
-| **Produz** | Um ticket com causa raiz e critério de aceite falseável, ou a constatação de que não há defeito |
+| **Produz** | Um ticket em `specs/<slug>/tickets/` com causa raiz e critério de aceite falseável, ou a constatação de que não há defeito |
 
 ### `backend-dotnet-spec` · por nome
 
@@ -144,7 +144,7 @@ de preencher a lacuna com suposição.
 | | |
 |---|---|
 | **Quando** | Logo após o grill, na mesma conversa |
-| **Produz** | `specs/<slug>.md` no repositório da solução |
+| **Produz** | `specs/<slug>/spec.md` no repositório da solução |
 
 ### `backend-dotnet-tickets` · por nome
 
@@ -158,7 +158,7 @@ do grill.
 | | |
 |---|---|
 | **Quando** | Após a spec, na mesma conversa |
-| **Produz** | Um arquivo por ticket em `specs/<slug>/tickets/` |
+| **Produz** | Um arquivo por ticket em `specs/<slug>/tickets/`, na pasta da spec |
 
 ### `backend-dotnet-padroes` · alcançada pelo agente
 

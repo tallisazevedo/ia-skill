@@ -50,9 +50,16 @@ formato de `backend-dotnet-tickets`: título, descrição, passos de reproduçã
 suspeita e critério de aceite. O critério de aceite precisa ser um teste que falha antes da
 correção e passa depois — não uma descrição vaga de "funcionando".
 
-**Concluído quando:** o desfecho corresponde à causa classificada, e é autossuficiente: o ticket
-é implementável sem depender do relato original, ou a constatação de "sem defeito" cita a
-evidência que a sustenta.
+**Onde o ticket é salvo.** Todo ticket que sai da triagem — de correção ou de comunicação — vai
+para `specs/<slug-do-defeito>/tickets/<NN>-<titulo>.md`, o mesmo layout de
+`backend-dotnet-tickets`: é de lá que `backend-dotnet-implementation` lê, e ela recebe só esse
+arquivo. Se o ticket ainda passar pelo grill (Etapa 4), a spec que sair de lá entra na mesma
+pasta, como `spec.md`. O desfecho de "regra funcionando" sem mudança de código não gera arquivo
+de ticket; registre a evidência na própria resposta ao relato.
+
+**Concluído quando:** o desfecho corresponde à causa classificada, todo ticket produzido está
+salvo no caminho acima, e o desfecho é autossuficiente: o ticket é implementável sem depender do
+relato original, ou a constatação de "sem defeito" cita a evidência que a sustenta.
 
 ## 4. Decida se o ticket precisa de grill
 
