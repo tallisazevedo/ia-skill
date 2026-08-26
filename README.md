@@ -310,9 +310,6 @@ padrões da empresa são o default, não uma imposição cega.
 Quando o time de arquitetura mudar uma regra, atualize a **referência** correspondente — não a
 skill. As skills apontam para as referências justamente para que exista um lugar só a editar.
 
-Registre em cada referência de qual documento ela veio e em que data. Sem isso, elas divergem do
-Confluence em silêncio e ninguém sabe qual das duas está certa.
-
 ### Antes de abrir PR
 
 - A regra nova tem **um** lugar, ou você acabou de criar uma segunda fonte de verdade?
