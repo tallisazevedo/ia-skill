@@ -5,25 +5,41 @@ description: Conduz uma mudança backend .NET do requisito até a validação. U
 
 # Implementação Backend .NET
 
+Comece em uma conversa nova, recebendo só o ticket. Se o ticket não bastar sozinho, o problema
+está no ticket — diga isso em vez de reconstruir o contexto por suposição.
+
 ## 1. Delimite
 
-Leia a solicitação, a solução e os testes próximos. Identifique o contexto de negócio, o fluxo de entrada e saída, as camadas tocadas e as regras que precisam permanecer verdadeiras.
+Leia o ticket, a solução e os testes próximos. Identifique o contexto de negócio, o fluxo de
+entrada e saída, as áreas tocadas e as regras que precisam permanecer verdadeiras.
 
 Invoque `backend-dotnet-padroes` e carregue a referência de cada área que a mudança toca.
 
-**Concluído quando:** existe um resumo curto com requisito, contexto, camadas tocadas, símbolos a criar ou alterar e casos de validação esperados.
+**Concluído quando:** existe um resumo curto com requisito, contexto, áreas tocadas, símbolos a
+criar ou alterar e casos de validação esperados.
 
 ## 2. Implemente por contrato
 
-Siga a ordem do tronco comum definida em `../backend-dotnet/SKILL.md`, encaminhando cada camada tocada à skill correspondente e registrando a razão de cada etapa pulada. Preserve a linguagem ubíqua em português para conceitos de negócio e use inglês apenas para padrões de projeto.
+Modele primeiro as regras de domínio, depois conecte as demais áreas conforme o fluxo exigir.
+Aplique a referência de cada área enquanto escreve o código, não depois — os critérios de
+conclusão dela valem como parte do trabalho.
 
-**Concluído quando:** a mudança está implementada em todas as camadas necessárias, sem responsabilidade de uma camada vazando para outra, e cada dependência nova possui uma origem e um consumidor claros.
+Preserve a linguagem ubíqua em português para conceitos de negócio e use inglês apenas para
+padrões de projeto.
+
+**Concluído quando:** a mudança está implementada em todas as áreas necessárias, sem
+responsabilidade de uma área vazando para outra, e cada dependência nova possui uma origem e um
+consumidor claros.
 
 ## 3. Verifique
 
-Execute o teste mais estreito que pode falsificar a hipótese da implementação. Em seguida execute os testes da solução, análise estática, build ou comando equivalente disponível. Revise diff, nomes, cancelamento assíncrono, persistência, registro de dependências e logs.
+Execute o teste mais estreito que pode falsificar a hipótese da implementação. Em seguida execute
+os testes da solução, análise estática, build ou comando equivalente disponível. Revise diff,
+nomes, cancelamento assíncrono, persistência, registro de dependências e logs.
 
-**Concluído quando:** os comandos executados estão registrados, todos passam ou cada falha externa está identificada, e a revisão cobre todos os arquivos modificados e todos os contratos tocados.
+**Concluído quando:** os comandos executados estão registrados, todos passam ou cada falha
+externa está identificada, e a revisão cobre todos os arquivos modificados e todos os contratos
+tocados.
 
 ## 4. Revise
 
@@ -34,6 +50,9 @@ empresa e com o ticket que originou o trabalho.
 
 ## 5. Entregue
 
-Produza um resumo com comportamento alterado, camadas tocadas, validações executadas, cobertura, decisões de nomenclatura e riscos residuais. Inclua explicitamente as etapas do roteador que foram puladas e por quê.
+Produza um resumo com comportamento alterado, áreas tocadas, validações executadas, cobertura,
+decisões de nomenclatura e riscos residuais. Marque explicitamente as áreas não tocadas como não
+aplicáveis, com o motivo.
 
-**Concluído quando:** outra pessoa consegue reproduzir a validação e localizar qualquer pendência sem depender de contexto implícito.
+**Concluído quando:** outra pessoa consegue reproduzir a validação e localizar qualquer pendência
+sem depender de contexto implícito.
