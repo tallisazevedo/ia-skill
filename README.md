@@ -37,13 +37,20 @@ review avulso. Você nunca precisa lembrar de encaminhá-los.
 ## Instalar
 
 ```bash
-npx skills add tallisazevedo/ia-skill
+npx skills add tallisazevedo/ia-skill --agent claude-code codex github-copilot opencode
 ```
 
-O Skills CLI instala a família inteira e configura a ferramenta que você usa. Ele distribui para
-Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Zed, Cline, opencode, Warp, Amp e outras
-— cada skill carrega um `agents/openai.yaml` com a metadata e a política de invocação da sua
-ferramenta.
+A família é mantida e testada para quatro ferramentas:
+
+| Ferramenta | Instala em | Invocação por nome vem de |
+|---|---|---|
+| Claude Code | `~/.claude/skills` | `disable-model-invocation` no frontmatter |
+| Codex | `~/.codex/skills` | `policy.allow_implicit_invocation` no `agents/openai.yaml` |
+| GitHub Copilot CLI | `~/.copilot/skills` | frontmatter |
+| OpenCode | `~/.config/opencode/skills` | frontmatter |
+
+Sem `--agent`, o CLI oferece todas as ferramentas que encontrar na máquina — o repositório não
+tem como restringir isso, então a lista acima é o contrato, não uma trava.
 
 Para atualizar depois:
 
@@ -57,8 +64,8 @@ Invoque `backend-dotnet` e descreva o que você vai fazer; o roteador escolhe o 
 sabe o que quer, pule direto: `backend-dotnet-grill` para um trabalho ainda em aberto,
 `backend-dotnet-triage` para um defeito que chegou de fora.
 
-A sintaxe muda por ferramenta — no Claude Code é `/backend-dotnet`, em outras é o seletor de
-skills. O nome é sempre o mesmo.
+A sintaxe muda por ferramenta — no Claude Code e no Copilot CLI é `/backend-dotnet`, no Codex e
+no OpenCode é o seletor de skills. O nome é sempre o mesmo.
 
 ---
 
