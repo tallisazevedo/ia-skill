@@ -37,25 +37,37 @@ review avulso. Você nunca precisa lembrar de encaminhá-los.
 ## Instalar
 
 ```bash
-npx skills add tallisazevedo/ia-skill --agent claude-code codex github-copilot opencode
+git clone https://github.com/tallisazevedo/ia-skill.git
+cd ia-skill
+./install.sh
 ```
 
-A família é mantida e testada para quatro ferramentas:
+O instalador é interativo e nada vem marcado: você digita, na hora, quais ferramentas recebem
+as skills — Claude Code, Codex, Gemini CLI, Cursor, OpenCode ou **Todas**.
 
-| Ferramenta | Instala em | Invocação por nome vem de |
+Se a escolha for de ferramentas individuais, ele pergunta onde instalar: na **estrutura
+específica** de cada ferramenta ou em `~/.agents/skills` compartilhado (uma cópia só, com links
+a partir de cada ferramenta). Com **Todas**, cada ferramenta recebe na sua estrutura específica,
+sem pergunta.
+
+A família é mantida e testada para cinco ferramentas:
+
+| Ferramenta | Estrutura específica | Invocação por nome vem de |
 |---|---|---|
 | Claude Code | `~/.claude/skills` | `disable-model-invocation` no frontmatter |
 | Codex | `~/.codex/skills` | `policy.allow_implicit_invocation` no `agents/openai.yaml` |
-| GitHub Copilot CLI | `~/.copilot/skills` | frontmatter |
+| Gemini CLI | `~/.gemini/skills` | frontmatter |
+| Cursor | `~/.cursor/skills` | frontmatter |
 | OpenCode | `~/.config/opencode/skills` | frontmatter |
 
-Sem `--agent`, o CLI oferece todas as ferramentas que encontrar na máquina — o repositório não
-tem como restringir isso, então a lista acima é o contrato, não uma trava.
+A instalação é sempre no escopo do usuário (global), para as skills valerem em qualquer
+projeto. Guarde o clone: ele é a base da atualização.
 
 Para atualizar depois:
 
 ```bash
-npx skills update
+git pull
+./install.sh
 ```
 
 ### Seu primeiro uso
@@ -64,8 +76,9 @@ Invoque `backend-dotnet` e descreva o que você vai fazer; o roteador escolhe o 
 sabe o que quer, pule direto: `backend-dotnet-grill` para um trabalho ainda em aberto,
 `backend-dotnet-triage` para um defeito que chegou de fora.
 
-A sintaxe muda por ferramenta — no Claude Code e no Copilot CLI é `/backend-dotnet`, no Codex e
-no OpenCode é o seletor de skills. O nome é sempre o mesmo.
+A sintaxe muda por ferramenta — no Claude Code é `/backend-dotnet`; no Codex, no Gemini CLI, no
+Cursor e no OpenCode a skill é chamada pelo nome, no seletor de skills ou na conversa. O nome é
+sempre o mesmo.
 
 ---
 
@@ -322,5 +335,5 @@ skill. As skills apontam para as referências justamente para que exista um luga
 - A seção nova termina em um critério de conclusão verificável?
 - A skill continua autossuficiente, sem link `../` para a pasta de outra skill?
 - Se você adicionou uma skill, ela entrou em `.claude-plugin/plugin.json` e ganhou seu
-  `agents/openai.yaml`?
+  `agents/openai.yaml`? (O `install.sh` descobre sozinho tudo que está em `skills/`.)
 - Se você mexeu na invocação de uma skill, este README e o roteador ainda dizem a verdade?
